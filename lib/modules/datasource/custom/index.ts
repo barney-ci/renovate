@@ -2,7 +2,7 @@ import is from '@sindresorhus/is';
 import jsonata from 'jsonata';
 import { logger } from '../../../logger';
 import { Datasource } from '../datasource';
-import type { GetReleasesConfig, ReleaseResult } from '../types';
+import type { DigestConfig, GetReleasesConfig, ReleaseResult } from '../types';
 import { fetchers } from './formats';
 import { ReleaseResultZodSchema } from './schema';
 import { getCustomConfig } from './utils';
@@ -56,5 +56,12 @@ export class CustomDatasource extends Datasource {
       logger.trace({ data }, 'Response that has failed validation');
       return null;
     }
+  }
+
+  override async getDigest(
+    config: DigestConfig,
+    newValue?: string
+  ): Promise<string | null> {
+    return await Promise.reject('Not implemented');
   }
 }
